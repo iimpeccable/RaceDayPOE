@@ -31,7 +31,7 @@ CI/CD Workflow
 •	Includes automated checks for commit history and file presence.
 Screenshot of successful green build: (PDF version of README will be included) 
 Video Presentation
-Unlisted YouTube link: (Video Link to be updated)
+Unlisted YouTube link: https://youtu.be/9dEouBo3yC0
 The video walkthrough covers:
 •	ERD design decisions.
 •	API endpoint plan choices.

@@ -1,0 +1,35 @@
+name: CI Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Validate /docs folder exists
+      run: |
+        if [ ! -d "./docs" ]; then
+          echo "/docs folder missing!"
+          exit 1
+        fi
+
+    - name: Validate required files
+      run: |
+        for file in POE_ERD.png POE_API_ENDPOINT_PLAN.pdf RaceDay_Script.sql ; do
+          if [ ! -f "./docs/$file" ]; then
+            echo "$file missing in /docs!"
+            exit 1
+          fi
+        done
+        echo "✅ All required files are present."
+
+    - name: Display success
+      run: echo "✅ Repository structure validated successfully!"

@@ -21,17 +21,22 @@ jobs:
           exit 1
         fi
 
-    # --- Part 2 .NET Build & Unit Tests ---
+    # --- Part 2 .NET Setup ---
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore RaceDay.API/RaceDay.API.slnx
+    # --- Restore & Build API ---
+    - name: Restore API dependencies
+      run: dotnet restore RaceDay.API/RaceDay.API.csproj
 
-    - name: Build Solution
-      run: dotnet build RaceDay.API/RaceDay.API.slnx --no-restore --configuration Release
+    - name: Build API Project
+      run: dotnet build RaceDay.API/RaceDay.API.csproj --no-restore --configuration Release
+
+    # --- Restore & Run Tests ---
+    - name: Restore Test dependencies
+      run: dotnet restore RaceDay.Tests/RaceDay.Tests.csproj
 
     - name: Run Unit Tests
-      run: dotnet test RaceDay.API/RaceDay.API.slnx --no-build --verbosity normal
+      run: dotnet test RaceDay.Tests/RaceDay.Tests.csproj --configuration Release --verbosity normal

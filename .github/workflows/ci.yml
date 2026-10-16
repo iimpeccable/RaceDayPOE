@@ -31,7 +31,7 @@ jobs:
       run: dotnet restore RaceDay.API/RaceDay.API.slnx
 
     - name: Build Solution
-      run: dotnet build RaceDay.API/RaceDay.API.sln --no-restore --configuration Release
+      run: dotnet build RaceDay.API/RaceDay.API.slnx --no-restore --configuration Release
 
     - name: Run Unit Tests
-      run: dotnet test RaceDay.API/RaceDay.API.sln --no-build --verbosity normal
+      run: dotnet test RaceDay.API/RaceDay.API.slnx --no-build --verbosity normal

@@ -1,35 +1,37 @@
-name: CI Validation
+name: RaceDay CI Workflow
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main", "master", "feature/*" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main", "master" ]
 
 jobs:
-  validate:
+  validate-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
-    - name: Validate /docs folder exists
+    # --- Part 1 Checks ---
+    - name: Verify /docs directory exists
       run: |
-        if [ ! -d "./docs" ]; then
-          echo "/docs folder missing!"
+        if [ ! -d "docs" ]; then
+          echo "Error: /docs directory missing!"
           exit 1
         fi
 
-    - name: Validate required files
-      run: |
-        for file in POE_ERD.png POE_API_ENDPOINT_PLAN.pdf RaceDay_Script.sql ; do
-          if [ ! -f "./docs/$file" ]; then
-            echo "$file missing in /docs!"
-            exit 1
-          fi
-        done
-        echo "✅ All required files are present."
+    # --- Part 2 .NET Build & Unit Tests ---
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
 
-    - name: Display success
-      run: echo "✅ Repository structure validated successfully!"
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build Solution
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Run Unit Tests
+      run: dotnet test --no-build --verbosity normal

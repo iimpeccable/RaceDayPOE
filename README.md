@@ -1,7 +1,7 @@
 RaceDay - Event Management System
 
 System Overview
-RaceDay is a web-based event management platform designed for South Africa's road running, walking, and cycling communities[cite: 26]. It modernizes paper-based registration by enabling organizers to create and manage events, categories, and results, while participants can browse events, register, and track their performance history.
+RaceDay is a web-based event management platform designed for South Africa's road running, walking, and cycling communities. It modernizes paper-based registration by enabling organizers to create and manage events, categories, and results, while participants can browse events, register, and track their performance history.
 
 The system is built progressively across three parts:
 Part 1: Planning documents (ERD, API endpoint plan, SQL database script). 
@@ -42,15 +42,20 @@ The solution includes an automated xUnit test suite (RaceDay.Tests) covering:
 •	Event retrieval and query verification. 
 •	Role-based access restriction checks. 
 All unit tests execute against an in-memory database instance to ensure rapid, isolated validation. 
+Screenshot Of Successful Tests
+ 
+
 
 CI/CD Workflow
 Configured with GitHub Actions in .github/workflows/ci.yml. On every push and pull request, the workflow: 
 1.	Restores project dependencies. 
 2.	Compiles the ASP.NET Core solution in Release mode. 
 3.	Executes all unit tests in RaceDay.Tests. 
+Screenshot of successful build:
+ 
 Video Walkthrough
 •	Unlisted YouTube Link Part 1: https://youtu.be/9dEouBo3yCO
-•	Unlisted YouTube Link Part 2:
+•	Unlisted YouTube Link Part 2: https://youtu.be/LwcqEs_oa0o 
 Walkthrough Topics Covered:
 •	ERD architecture and design decisions.
 •	ASP.NET Core project structure, Controllers, and DTOs.
